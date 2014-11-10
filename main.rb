@@ -1,5 +1,5 @@
 require "./circular_buffer.rb"
-require "./managed_buffer.rb"
+require "./queue.rb"
 require "./queue_client.rb"
 require "./producer.rb"
 require "./consumer.rb"
@@ -10,7 +10,7 @@ producer = Producer.new do
   "Hello #{count += 1}"
 end
 
-buffer = ManagedBuffer.new
+buffer = Queue.new
 consumer = Consumer.new do |e|
   puts e
 end

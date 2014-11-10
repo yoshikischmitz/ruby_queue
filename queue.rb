@@ -1,4 +1,4 @@
-class ManagedBuffer
+class Queue
   attr_accessor :buffer, :client_list
 
   def initialize

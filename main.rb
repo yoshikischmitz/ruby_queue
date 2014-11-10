@@ -1,5 +1,6 @@
 require "./circular_buffer.rb"
 require "./managed_buffer.rb"
+require "./queue_client.rb"
 require "./producer.rb"
 require "./consumer.rb"
 require 'pry'

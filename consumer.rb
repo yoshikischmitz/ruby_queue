@@ -9,8 +9,8 @@ class Consumer
     raise StandardError.new("Must be registered with a buffer") if buffer.nil?
     Thread.new do 
       loop do
+        break if buffer.dead? && buffer.empty? 
         @consumer_function.call(buffer.pop)
-        break if buffer.dead? && buffer.empty?
       end
     end
   end

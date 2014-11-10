@@ -1,5 +1,5 @@
 class ManagedBuffer
-  attr_accessor :buffer
+  attr_accessor :buffer, :client_list
 
   def initialize
     @buffer = CircularBuffer.new
@@ -24,7 +24,7 @@ class ManagedBuffer
 
   def register(*buffer_clients)
     buffer_clients.each do |x|
-      case x.class
+      case x
       when Producer
         @client_list[:producers] << x
       when Consumer
@@ -35,7 +35,7 @@ class ManagedBuffer
   end
 
   def dead?
-    @client_list[:producers].all?(&:dead?)
+    @client_list[:producers].all?{|x|x.dead?}
   end
 
   def empty?

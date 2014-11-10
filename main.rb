@@ -19,5 +19,3 @@ p_thread = producer.run
 c_thread = consumer.run
 p_thread.join
 c_thread.join
-
-binding.pry

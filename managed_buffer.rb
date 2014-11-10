@@ -16,9 +16,6 @@ class ManagedBuffer
     @buffer
   end
 
-  def notify_clients(client_type)
-    @client_list[client_type].each{|x|x.thread.run}
-  end
 
   def pop
     unless buffer.any?
@@ -51,5 +48,11 @@ class ManagedBuffer
 
   def empty?
     !@buffer.any?
+  end
+
+  private
+
+  def notify_clients(client_type)
+    @client_list[client_type].each{|x|x.thread.run}
   end
 end

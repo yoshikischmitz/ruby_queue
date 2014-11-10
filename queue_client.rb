@@ -7,10 +7,7 @@ class QueueClient
 
   def run
     raise StandardError.new("Must be registered with a buffer") if buffer.nil?
-    @thread = 
-      Thread.new do 
-        perform
-      end
+    @thread = Thread.new { perform }
   end
 
   def dead?

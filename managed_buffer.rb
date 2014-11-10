@@ -4,18 +4,19 @@ class ManagedBuffer
   def initialize
     @buffer = CircularBuffer.new
     @client_list = {producers: [], consumers: []}
+    @mutex = Mutex.new
   end
 
   def <<(val)
-    until buffer.open?
+    @mutex.synchronize do
+      @buffer << val
     end
-    @buffer << val
   end
 
   def pop
-    until buffer.any?
+    @mutex.synchronize do
+      @buffer.pop
     end
-    @buffer.pop
   end
   
   def to_s

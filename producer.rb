@@ -9,7 +9,7 @@ class Producer
     @dead = false
     raise StandardError.new("Must be registered with a buffer") if buffer.nil?
     Thread.new do 
-      10.times do
+      1000.times do
         puts "producing!"
         buffer << @producer_function.call
       end

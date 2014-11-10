@@ -52,6 +52,6 @@ class ManagedBuffer
   private
 
   def notify_clients(client_type)
-    @client_list[client_type].each{|x|x.thread.run if x.thread.status == 'sleep'}
+    @client_list[client_type].each(&:notify_thread)
   end
 end

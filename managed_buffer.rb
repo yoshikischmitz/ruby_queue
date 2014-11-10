@@ -4,23 +4,29 @@ class ManagedBuffer
   def initialize
     @buffer = CircularBuffer.new
     @client_list = {producers: [], consumers: []}
-    @mutex = Mutex.new
+    @cv = ConditionVariable.new
   end
 
   def <<(val)
-    until buffer.open?
+    unless buffer.open?
+      Thread.stop
     end
-    @mutex.synchronize do
-      @buffer << val
-    end
+    @buffer << val
+    notify_clients :consumers
+    @buffer
+  end
+
+  def notify_clients(client_type)
+    @client_list[client_type].each{|x|x.thread.run}
   end
 
   def pop
-    until buffer.any?
+    unless buffer.any?
+      Thread.stop
     end
-    @mutex.synchronize do
-      @buffer.pop
-    end
+    val = @buffer.pop
+    notify_clients :producers
+    val
   end
   
   def to_s

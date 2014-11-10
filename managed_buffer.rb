@@ -4,7 +4,6 @@ class ManagedBuffer
   def initialize
     @buffer = CircularBuffer.new
     @client_list = {producers: [], consumers: []}
-    @cv = ConditionVariable.new
   end
 
   def <<(val)

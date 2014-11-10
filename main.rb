@@ -6,11 +6,13 @@ require "./consumer.rb"
 require 'pry'
 
 count = 0
+
+buffer = SimpleQueue.new
+
 producer = Producer.new do
   "Hello #{count += 1}"
 end
 
-buffer = Queue.new
 consumer = Consumer.new do |e|
   puts e
 end

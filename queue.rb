@@ -1,4 +1,4 @@
-class Queue
+class SimpleQueue
   attr_accessor :buffer, :client_list
 
   def initialize

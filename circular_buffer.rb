@@ -1,5 +1,5 @@
 class CircularBuffer
-  BUFFER_SIZE = 1000
+  BUFFER_SIZE = 100
 
   def initialize
     @buffer_array = []

@@ -14,7 +14,7 @@ class QueueClient
   end
 
   def dead?
-    self.thread.status == false
+    !self.thread.alive?
   end
 
   def notify_thread

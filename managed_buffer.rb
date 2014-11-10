@@ -8,12 +8,16 @@ class ManagedBuffer
   end
 
   def <<(val)
+    until buffer.open?
+    end
     @mutex.synchronize do
       @buffer << val
     end
   end
 
   def pop
+    until buffer.any?
+    end
     @mutex.synchronize do
       @buffer.pop
     end

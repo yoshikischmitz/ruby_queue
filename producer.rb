@@ -1,8 +1,9 @@
 class Producer
-  attr_accessor :buffer, :dead, :thread
+  attr_accessor :buffer, :dead, :thread, :buffer_value_counter
 
   def initialize(&producer_function)
     @producer_function = producer_function
+    @buffer_value_counter = 0
   end
 
   def run
@@ -13,6 +14,7 @@ class Producer
       10000.times do
         #sleep(rand(0.01..0.5)) #simulate real work being done. 
         buffer << @producer_function.call
+        @buffer_value_counter += 1
       end
       @dead = true
     end

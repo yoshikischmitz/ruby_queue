@@ -17,5 +17,8 @@ end
 buffer.register(producer, consumer)
 p_thread = producer.run
 c_thread = consumer.run
-p_thread.join
 c_thread.join
+p_thread.join
+
+puts "Consumed #{consumer.buffer_value_counter}"
+puts "Produced #{producer.buffer_value_counter}"

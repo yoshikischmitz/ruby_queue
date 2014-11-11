@@ -7,7 +7,7 @@ class SimpleQueue
   end
 
   def <<(val)
-    unless buffer.open?
+    if buffer.full?
       Thread.stop
     end
     @buffer << val
@@ -17,7 +17,7 @@ class SimpleQueue
 
 
   def pop
-    unless buffer.any?
+    if buffer.empty?
       Thread.stop
     end
     val = @buffer.pop
@@ -26,7 +26,7 @@ class SimpleQueue
   end
   
   def to_s
-    @buffer.to_s
+    buffer.to_s
   end
 
   def register(*buffer_clients)
@@ -46,7 +46,7 @@ class SimpleQueue
   end
 
   def empty?
-    !@buffer.any?
+    buffer.empty?
   end
 
   private
